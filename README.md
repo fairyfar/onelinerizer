@@ -1,14 +1,15 @@
 Oneliner-izer
 =========
 
-[![Build Status](https://travis-ci.org/csvoss/onelinerizer.svg?branch=master)](https://travis-ci.org/csvoss/onelinerizer)
+![logo](https://github.com/fairyfar/onelinerizer/raw/master/logo.png)
 
+[![Build Status](https://travis-ci.org/csvoss/onelinerizer.svg?branch=master)](https://travis-ci.org/csvoss/onelinerizer)
 
 Convert any Python 2 script into a single line of code.
 
 No newlines allowed. No semicolons, either. No silly file I/O tricks, or eval or exec. Just good, old-fashioned λ.
 
-Play with a live demo at [onelinerizer.com](http://www.onelinerizer.com/)! Watch the [presentation at PyCon 2016](https://www.youtube.com/watch?v=DsUxuz_Rt8g), or peruse the [slide deck](https://speakerdeck.com/pycon2016/chelsea-voss-oneliner-izer-an-exercise-in-constrained-coding).
+Play with a live demo at [www.200yi.com/onelinerizer/](http://www.200yi.com/onelinerizer/)! Watch the [presentation at PyCon 2016](https://www.youtube.com/watch?v=DsUxuz_Rt8g), or peruse the [slide deck](https://speakerdeck.com/pycon2016/chelsea-voss-oneliner-izer-an-exercise-in-constrained-coding).
 
 
 User Installation and Usage
@@ -163,7 +164,7 @@ Open Problems
 Developer Installation and Testing
 ---
 ```sh
-$ git clone https://github.com/csvoss/onelinerizer
+$ git clone https://github.com/fairyfar/onelinerizer.git
 $ cd onelinerizer
 $ python -m onelinerizer .setup.py setup.py
 $ python setup.py test
