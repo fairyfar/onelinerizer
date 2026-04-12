@@ -3,14 +3,22 @@ Oneliner-izer
 
 ![logo](https://github.com/fairyfar/onelinerizer/raw/master/logo.png)
 
-[![Build Status](https://travis-ci.org/csvoss/onelinerizer.svg?branch=master)](https://travis-ci.org/csvoss/onelinerizer)
-
-Convert any Python 2 script into a single line of code.
+Convert any Python 2 or 3 script into a single line of code.
 
 No newlines allowed. No semicolons, either. No silly file I/O tricks, or eval or exec. Just good, old-fashioned λ.
 
 Play with a live demo at [www.200yi.com/onelinerizer/](http://www.200yi.com/onelinerizer/)! Watch the [presentation at PyCon 2016](https://www.youtube.com/watch?v=DsUxuz_Rt8g), or peruse the [slide deck](https://speakerdeck.com/pycon2016/chelsea-voss-oneliner-izer-an-exercise-in-constrained-coding).
 
+Declarations
+---
+
+This poject was forked from https://github.com/csvoss/onelinerizer
+
+The main changes include the following:
+
+1. Add a new demo website.
+
+2. Python 3 is supported.
 
 User Installation and Usage
 ---
@@ -21,7 +29,7 @@ Install via `pip` from PyPI:
 $ pip install onelinerizer
 ```
 
-Use either the command line function or the Python module:
+Use either the command line function or the Python 2 module:
 
 ```sh
 $ echo "def f(x):\n    print x\nf(4)" > sandbox.py
@@ -29,12 +37,21 @@ $ onelinerizer sandbox.py --debug
 $ onelinerizer sandbox_ol.py
 ```
 
+Python 2:
+
 ```python
 from onelinerizer import onelinerize
 onelinerize("def f(x):\n    print x\nf(4)")
 ```
 
-Examples
+Python 3:
+
+```python
+from onelinerizer3 import onelinerize
+onelinerize("def f(x):\n    print(x)\nf(4)")
+```
+
+Examples (Python 2)
 --------
 
 **Before:**
@@ -101,6 +118,35 @@ guess_my_number(42)
 
 ```python
 (lambda __builtin__: (lambda __print, __y, d: [(lambda ___: None)(d.guess_my_number(42)) for d.guess_my_number in [(lambda n:[(__y(lambda __this: (lambda d: (lambda __after: [(lambda __after: (lambda ___: __after(d))(__print('Not a positive integer!')) if (d.len(d.user_input)==0 or (not d.user_input.isdigit())) else [(lambda __after: (lambda ___: __after(d))(__print('Too big! Try again!')) if d.user_input>d.n else (lambda __after: (lambda ___: __after(d))(__print('Too small! Try again!')) if d.user_input<d.n else (lambda ___: d.True)(__print('You win!')))(lambda d: __after(d)))(lambda d: __after(d)) for d.user_input in [(d.int(d.user_input))]][0])(lambda d: __this(d)) for d.user_input in [(d.raw_input('Enter a positive integer to guess: '))]][0] if d.True else __after(d))(lambda d: None))))(d) for d.n in [(n)]][0])]][0])(__builtin__.__dict__['print'],(lambda f: (lambda x: x(x))(lambda y: f(lambda *args: y(y)(*args)))),type('StateDict',(),__builtin__.__dict__)()))(__import__('__builtin__'))
+```
+
+Examples (Python 3)
+--------
+
+**Before:**
+
+```python
+def guess_my_number(n):
+    while True:
+        user_input = input("Enter a positive integer to guess: ")
+        if len(user_input)==0 or not user_input.isdigit():
+            print("Not a positive integer!")
+        else:
+            user_input = int(user_input)
+            if user_input > n:
+                print("Too big! Try again!")
+            elif user_input < n:
+                print("Too small! Try again!")
+            else:
+                print("You win!")
+                return True
+guess_my_number(42)
+```
+
+**After:**
+
+```python
+(lambda __g, __y, __print: [(guess_my_number(42), None)[1] for __g['guess_my_number'], guess_my_number.__name__ in [(lambda n: (lambda __l: [(lambda __after: __y(lambda __this: lambda: [(lambda __after: (__print('Not a positive integer!'), __after())[1] if ((len(__l['user_input']) == 0) or (not __l['user_input'].isdigit())) else [(lambda __after: (__print('Too big! Try again!'), __after())[1] if (__l['user_input'] > __l['n']) else (lambda __after: (__print('Too small! Try again!'), __after())[1] if (__l['user_input'] < __l['n']) else (__print('You win!'), True)[1])(lambda: __after()))(lambda: __after()) for __l['user_input'] in [(int(__l['user_input']))]][0])(lambda: __this()) for __l['user_input'] in [(input('Enter a positive integer to guess: '))]][0] if True else __after())())(lambda: None) for __l['n'] in [(n)]][0])({}), 'guess_my_number')]][0])(globals(), (lambda f: (lambda x: x(x))(lambda y: f(lambda: y(y)()))), __import__('builtins', level=0).__dict__['print'])
 ```
 
 FAQ
