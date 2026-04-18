@@ -639,11 +639,15 @@ class Namespace(ast.NodeVisitor):
         return after
 
     def visit_ImportFrom(self, tree):
-        body = assignment_component(
-            T('{after}'),
-            T(', ').join(self.store_var(alias.name if alias.asname is None
-                                        else alias.asname) for alias in tree.names),
-            T(', ').join('__mod.' + alias.name for alias in tree.names))
+        star_import = any(alias.name == '*' for alias in tree.names)
+        if star_import:
+            body = T('([__g.__setitem__(name, getattr(__mod, name)) for name in (__mod.__all__ if hasattr(__mod, "__all__") else [n for n in dir(__mod) if not n.startswith("_")]) ], {after})[1]')
+        else:
+            body = assignment_component(
+                T('{after}'),
+                T(', ').join(self.store_var(alias.name if alias.asname is None
+                                            else alias.asname) for alias in tree.names),
+                T(', ').join('__mod.' + alias.name for alias in tree.names))
         if tree.module == '__future__':
             self.futures |= set(alias.name for alias in tree.names)
             if PY3:

@@ -14,13 +14,15 @@ Declarations
 
 This poject was forked from https://github.com/csvoss/onelinerizer
 
-The main changes include the following:
+The main changes (improved by AI) include the following:
 
 1. Add a new demo website.
 
 2. Python 3 is supported.
 
 3. Supports the 'with' syntax.
+
+4. Supports 'from foo import *'.
 
 User Installation and Usage
 ---
@@ -198,11 +200,6 @@ sys.setrecursionlimit(new_limit)
 ```
 
 in your original Python code. (onelinerizer will not place this command in for you.)
-
-
-Not Implemented
----------------
-* from foo import *
 
 Open Problems
 -------------
