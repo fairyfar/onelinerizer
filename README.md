@@ -20,6 +20,8 @@ The main changes include the following:
 
 2. Python 3 is supported.
 
+3. Supports the 'with' syntax.
+
 User Installation and Usage
 ---
 
@@ -204,7 +206,6 @@ Not Implemented
 
 Open Problems
 -------------
-* with
 * yield
 
 Developer Installation and Testing

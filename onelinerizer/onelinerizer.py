@@ -774,7 +774,22 @@ class Namespace(ast.NodeVisitor):
                 test, orelse))
 
     def visit_With(self, tree):
-        raise NotImplementedError('Open problem: with')
+        code = self.many_to_one(tree.body, after=T('{after}'))
+        items = getattr(tree, 'items', None)
+        if items is None:
+            items = [tree]
+        for i, item in enumerate(reversed(items)):
+            cm_name = '__cm{}'.format(i)
+            cm_expr = self.visit(item.context_expr)
+            enter_call = T('{cm}.__enter__()').format(cm=cm_name)
+            if getattr(item, 'optional_vars', None) is None:
+                code = assignment_component(code, '__enter{}'.format(i), enter_call)
+            else:
+                code = assignment_component(code, self.visit(item.optional_vars), enter_call)
+            code = T('({}, {cm}.__exit__(None, None, None))[0]').format(
+                code, cm=cm_name)
+            code = assignment_component(code, cm_name, cm_expr)
+        return code
 
     def visit_Yield(self, tree):
         raise NotImplementedError('Open problem: yield')
